@@ -1,0 +1,6 @@
+{
+  "name": "QBasic Binary Image Studio",
+  "description": "Convert images to QBasic binary formats (1-bit to 32-bit) with dithering algorithms, binary inspector, and authentic QBasic loader and saver code samples.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
