@@ -12,7 +12,8 @@ interface ImageControlsProps {
   onChangeCustomDimensions: (w: number, h: number) => void;
   fitMode: 'stretch' | 'contain' | 'cover';
   onChangeFitMode: (mode: 'stretch' | 'contain' | 'cover') => void;
-  onImageSelected: (dataUrl: string) => void;
+  onSelectSample: (sampleId: string, url: string) => void;
+  onUploadImage: (url: string) => void;
   activeSampleId: string;
 }
 
@@ -24,7 +25,8 @@ export const ImageControls: React.FC<ImageControlsProps> = ({
   onChangeCustomDimensions,
   fitMode,
   onChangeFitMode,
-  onImageSelected,
+  onSelectSample,
+  onUploadImage,
   activeSampleId,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -35,7 +37,7 @@ export const ImageControls: React.FC<ImageControlsProps> = ({
       const reader = new FileReader();
       reader.onload = (event) => {
         if (event.target?.result) {
-          onImageSelected(event.target.result as string);
+          onUploadImage(event.target.result as string);
         }
       };
       reader.readAsDataURL(file);
@@ -49,7 +51,7 @@ export const ImageControls: React.FC<ImageControlsProps> = ({
       const reader = new FileReader();
       reader.onload = (event) => {
         if (event.target?.result) {
-          onImageSelected(event.target.result as string);
+          onUploadImage(event.target.result as string);
         }
       };
       reader.readAsDataURL(file);
@@ -70,7 +72,7 @@ export const ImageControls: React.FC<ImageControlsProps> = ({
           {SAMPLE_IMAGES.map((sample) => (
             <button
               key={sample.id}
-              onClick={() => onImageSelected(sample.generate())}
+              onClick={() => onSelectSample(sample.id, sample.generate())}
               className={`text-left p-2 rounded border transition-colors ${
                 activeSampleId === sample.id
                   ? 'bg-neutral-800 border-blue-500 text-white shadow-sm'
